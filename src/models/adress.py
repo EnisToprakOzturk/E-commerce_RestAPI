@@ -1,7 +1,8 @@
+from datetime import datetime
+from config.db import db
 import sys
 sys.path.append('../')
-from config.db import db
-from datetime import datetime
+
 
 class AdressModel(db.Model):
 
@@ -14,13 +15,18 @@ class AdressModel(db.Model):
     province = db.Column(db.String(25), nullable=False)
     street = db.Column(db.String(25), nullable=False)
     zipcode = db.Column(db.String(5), nullable=False)
-    phoneNumber = db.Column(db.String(10),nullable=False)
-    adress = db.Column(db.String(100), nullable=False) #adresin girilmemiş kısmı için 
+    phoneNumber = db.Column(db.String(10), nullable=False)
+    # adresin girilmemiş kısmı için
+    adress = db.Column(db.String(100), nullable=False)
 
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
+    userId = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __repr__ (self):
+    created_at = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def __repr__(self):
         return {
             'name': self.name,
             'city': self.city,
