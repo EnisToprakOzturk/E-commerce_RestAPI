@@ -1,4 +1,5 @@
 from datetime import datetime
+from sqlalchemy.dialects.postgresql import UUID
 from config.db import db
 import sys
 sys.path.append('../')
@@ -8,7 +9,7 @@ class AdressModel(db.Model):
 
     __tablename__ = 'adress'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(25), nullable=False)
     state = db.Column(db.String(25), nullable=False)
@@ -19,7 +20,7 @@ class AdressModel(db.Model):
     # adresin girilmemiş kısmı için
     adress = db.Column(db.String(100), nullable=False)
 
-    userId = db.Column(db.Integer, db.ForeignKey('user.id'))
+    userId = db.Column(UUID(as_uuid=True), db.ForeignKey('user.id'))
 
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.utcnow)
@@ -37,5 +38,7 @@ class AdressModel(db.Model):
             'phoneNumber': self.phoneNumber,
             'adress': self.adress,
             'createdAt': self.created_at,
-            'updatedAt': self.updated_at
+            'updatedAt': self.updated_at,
+
+            'userId': self.userId
         }

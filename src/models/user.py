@@ -13,7 +13,7 @@ class UserModel(db.Model):
     surname = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
-    dateOfBirth = db.Column(db.Datetime, nullable=False)
+    dateOfBirth = db.Column(db.String, nullable=False)
 
     adresses = db.relationship('adress', backref='user')
 
@@ -29,5 +29,7 @@ class UserModel(db.Model):
             'password': self.password,
             'dateOfBirth': self.dateOfBirth,
             'createdAt': self.createdAt,
-            'updatedAt': self.updatedAt
+            'updatedAt': self.updatedAt,
+
+            'adresses': self.adresses
         }
