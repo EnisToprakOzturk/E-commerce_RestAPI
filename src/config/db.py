@@ -4,6 +4,3 @@ import os
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 db = SQLAlchemy(app)
-
-if not os.path.exist(db.sqlite):
-    db.create_all()
